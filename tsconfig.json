@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "system",
+        "noImplicitAny": true,
+        "removeComments": false,
+        "preserveConstEnums": true,
+        "outFile": "./index.js",
+        "sourceMap": true,
+        "target": "ESNext"
+    },
+    "files": [
+        "chess-players.ts"
+    ]
+}
