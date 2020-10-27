@@ -1,6 +1,4 @@
-console.log('TypeScript for Chess players');
-
-// Rating categories as a union of possible values
+// Rating categories
 type RatingCategory =
       'UR' // Unranked
     | 'N' // Novices
@@ -15,23 +13,7 @@ type RatingCategory =
     | 'GM' // GrandMaster
     | 'SGM'; // Super GrandMaster
 
-interface Rating {
-    category: RatingCategory;
-    value: number;
-}
-
-interface Player {
-    id: string;
-    name: string;
-    rating: number;
-}
-
-type Match = [
-    winner: Player,
-    loser: Player,
-]
-
-class CreatePlayer {
+class Player {
     id: string;
     name: string;
     rating: number;
@@ -70,13 +52,9 @@ class CreatePlayer {
     }
 }
 
-const joe = new CreatePlayer('Joe', 1616)
-
-const magnus = new CreatePlayer('Magnus', 2845)
+const magnus = new Player('Magnus', 2845)
 
 console.log(
-    joe, '\n',
-    joe.ratingCategory, '\n',
-    magnus, '\n',
-    magnus.ratingCategory
-);
+    magnus, '\n', // CreatePlayer { id: '980', name: 'Magnus', rating: 2845 } 
+    magnus.ratingCategory // SGM
+)
