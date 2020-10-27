@@ -2,7 +2,8 @@ console.log('TypeScript for Chess players');
 
 // Rating categories as a union of possible values
 type RatingCategory =
-      'N' // Novices
+      'UR' // Unranked
+    | 'N' // Novices
     | 'CD' // Class D
     | 'CC' // Class C
     | 'CB' // Class B
@@ -20,43 +21,62 @@ interface Rating {
 }
 
 interface Player {
-    id: number;
+    id: string;
     name: string;
-    rating: Rating;
+    rating: number;
 }
+
+type Match = [
+    winner: Player,
+    loser: Player,
+]
 
 class CreatePlayer {
+    id: string;
     name: string;
-    ratingValue: number;
-    rating: Rating;
+    rating: number;
 
-    constructor(name: string, ratingValue: number) {
+    constructor(name: string, rating: number) {
+        this.id = Math.floor(Math.random() * 1000).toString();
         this.name = name;
-        this.rating = {
-            category: 'CA',
-            value: ratingValue
-        };
+        this.rating = rating;
     }
 
-    get isRatingValue(): true | false {
-        return this.rating.value > 0;
+    get ratingCategory(): RatingCategory {
+        const { rating: r } = this;
+         if (r < 1200) {
+            return 'N' // Novices
+        } else if (r < 1400) {
+            return 'CD' // Class D
+        } else if (r < 1600) {
+            return 'CC' // Class C
+        } else if (r < 1800) {
+            return 'CB' // Class B
+        } else if (r < 2000) {
+            return 'CA' // Class A
+        } else if (r < 2200) {
+            return 'CM-USA' // USA Cadidate Master
+        } else if (r < 2300) {
+            return 'CM' // Candidate Master
+        } else if (r < 2400) {
+            return 'FM' // FIDE Master
+        } else if (r < 2500) {
+            return 'IM' // International Master
+        } else if (r < 2700) {
+            return 'GM' // GrandMaster
+        } else {
+            return 'SGM'; // (informal title) Super GrandMaster
+        }
     }
-
 }
 
-const Joe: Player = {
-    id: 216,
-    name: 'Joe Matune',
-    rating: {
-        category: 'CB',
-        value: 2160
-    }
-}
+const joe = new CreatePlayer('Joe', 1616)
 
-const magnus = new CreatePlayer('Magnus', 2845);
+const magnus = new CreatePlayer('Magnus', 2845)
 
 console.log(
-    Joe, '\n',
+    joe, '\n',
+    joe.ratingCategory, '\n',
     magnus, '\n',
-    magnus.isRatingValue
+    magnus.ratingCategory
 );
